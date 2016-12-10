@@ -74,3 +74,13 @@ def decode(instructions):
         code.append(current_number)
 
     return int(''.join([str(c) for c in code]))
+
+
+if __name__ == '__main__':
+    import sys
+    import io
+
+    input_file = sys.argv[1]
+    instructions = [x.strip() for x in io.open(input_file).readlines()]
+
+    print(decode(instructions))
