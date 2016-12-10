@@ -1,12 +1,9 @@
 from day2.bathroom_security import decode
 
 
-def test_decode():
+def test_single_instruction():
     instructions = [
-        'ULL'
-        'RRDDD'
-        'LURDL'
-        'UUUUD'
+        'U'
     ]
 
-    assert decode(instructions) == '1985'
+    assert decode(instructions) == '2'
