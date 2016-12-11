@@ -22,19 +22,38 @@ def possible_triangle(triangle):
 
     return True
 
-impossible = [5, 10, 25]
-assert not possible_triangle(impossible)
+
+def tests():
+    impossible = [5, 10, 25]
+    assert not possible_triangle(impossible)
+    column = [101, 102, 103]
+    assert possible_triangle(column)
+
+
+def count_possible_triangles(triangles):
+    possible_triangles = 0
+    for triangle in triangles:
+        possible = possible_triangle(triangle)
+        possible_triangles += 1 if possible else 0
+        # print('{} - {}'.format(triangle, possible))
+    return possible_triangles
+
 
 if __name__ == '__main__':
     import sys
     import io
 
     input_file = sys.argv[1]
-    triangles = [x.split() for x in io.open(input_file).readlines()]
+    file_contents = io.open(input_file).readlines()
+    # triangle_input = [x.split() for x in file_contents]
+    #
+    # print(count_possible_triangles(triangle_input))
 
-    possible_triangles = 0
-    for triangle in triangles:
-        possible = possible_triangle(triangle)
-        possible_triangles += 1 if possible else 0
-        print('{} - {}'.format(triangle, possible))
-    print(possible_triangles)
+    columns = []
+    for x in file_contents:
+        for i, column in enumerate(x.split()):
+            print(locals())
+            columns[i].append(column)
+
+    print(columns)
+
