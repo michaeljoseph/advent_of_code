@@ -22,3 +22,13 @@ def calculate_checksum(encrypted_name):
         checksum.append(''.join(letters))
 
     return ''.join(checksum)[:5]
+
+
+def valid_rooms_sector_sum(rooms):
+    sector_id_total = 0
+    for room in rooms:
+        encrypted_name, sector_id, checksum = parse_room(room)
+        if checksum == calculate_checksum(encrypted_name):
+            sector_id_total += int(sector_id)
+
+    return sector_id_total
