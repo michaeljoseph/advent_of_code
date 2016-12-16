@@ -10,6 +10,8 @@ def parse_room(room):
 
 
 def rotate_letter(letter, times):
+    if letter == '-':
+        return ' '
     letter_as_number = ord(letter)
     rotated_letter = letter_as_number + (times % 26)
 
