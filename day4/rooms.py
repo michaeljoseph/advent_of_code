@@ -22,10 +22,9 @@ def rotate_letter(letter, times):
 
 
 def decrypt_room_name(room, sector_id):
-    decrypted_name = []
-    for letter in room:
-        decrypted_name.append(rotate_letter(letter, sector_id))
-    return ''.join(decrypted_name)
+    return ''.join([
+       rotate_letter(letter, sector_id) for letter in room
+    ])
 
 
 def calculate_checksum(encrypted_name):
@@ -35,12 +34,12 @@ def calculate_checksum(encrypted_name):
     for value, occurrences in c.most_common():
         occurrence_map[occurrences].append(value)
 
-    checksum = []
-    for occurrence in reversed(sorted(occurrence_map.keys())):
-        letters = sorted(occurrence_map[occurrence])
-        checksum.append(''.join(letters))
-
-    return ''.join(checksum)[:5]
+    return ''.join([
+        ''.join(
+            sorted(occurrence_map[occurrence])
+        )
+        for occurrence in reversed(sorted(occurrence_map.keys()))
+    ])[:5]
 
 
 def valid_rooms_sector_sum(rooms):
