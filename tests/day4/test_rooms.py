@@ -15,8 +15,13 @@ def test_parse_room():
     ('aaaaabbbzyx', 'abxyz'),
     ('abcdefgh', 'abcde'),
     ('notarealroom', 'oarel'),
-    ('totallyrealroom', 'decoy'),
 ])
 def test_checksum(encrypted_name, checksum):
     assert calculate_checksum(encrypted_name) == checksum
 
+
+@pytest.mark.parametrize('encrypted_name, checksum', [
+    ('totallyrealroom', 'decoy'),
+])
+def test_bad_checksum(encrypted_name, checksum):
+    assert not calculate_checksum(encrypted_name) == checksum
