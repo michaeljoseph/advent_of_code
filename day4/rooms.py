@@ -60,3 +60,7 @@ if __name__ == '__main__':
 
     rooms = io.open(input_file).readlines()
     print(valid_rooms_sector_sum(rooms))
+
+    for room in rooms:
+        encrypted_name, sector_id, checksum = parse_room(room)
+        print(sector_id, decrypt_room_name(encrypted_name, sector_id))
