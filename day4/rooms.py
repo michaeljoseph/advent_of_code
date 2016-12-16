@@ -1,12 +1,5 @@
-"""
-checksum is
-the five most common letters in the encrypted name
-in order,
-with ties broken by alphabetization
-"""
-
 import re
-from collections import Counter
+from collections import defaultdict, Counter
 
 
 def parse_room(room):
@@ -18,5 +11,14 @@ def parse_room(room):
 
 def calculate_checksum(encrypted_name):
     c = Counter(encrypted_name)
-    return ''.join(sorted([count[0] for count in c.most_common(5)]))
+    occurrence_map = defaultdict(lambda: [])
 
+    for value, occurrences in c.most_common():
+        occurrence_map[occurrences].append(value)
+
+    checksum = []
+    for occurrence in reversed(sorted(occurrence_map.keys())):
+        letters = sorted(occurrence_map[occurrence])
+        checksum.append(''.join(letters))
+
+    return ''.join(checksum)[:5]
