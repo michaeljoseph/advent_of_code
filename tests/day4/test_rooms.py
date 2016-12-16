@@ -51,6 +51,6 @@ def test_rotate_letter(letter, rotations, rotated_letter):
 
 
 def test_decrypt_room_name():
-    encrypted_name = 'qzmt-zixmtkozy-ivhz-343'
+    encrypted_name = 'qzmt-zixmtkozy-ivhz'
     sector_id = 343
     assert decrypt_room_name(encrypted_name, sector_id) == 'very encrypted name'

@@ -20,7 +20,10 @@ def rotate_letter(letter, times):
 
 
 def decrypt_room_name(room, sector_id):
-    return 'very encrypted name'
+    decrypted_name = []
+    for letter in room:
+        decrypted_name.append(rotate_letter(letter, sector_id))
+    return ''.join(decrypted_name)
 
 
 def calculate_checksum(encrypted_name):
