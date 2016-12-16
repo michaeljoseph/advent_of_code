@@ -39,6 +39,9 @@ def test_sector_sum():
 
 @pytest.mark.parametrize('letter, rotations, rotated_letter', [
     ('a', 1, 'b'),
+    ('b', 2, 'd'),
+    ('z', 1, 'a'),
+    ('z', 0, 'z'),
 ])
 def test_rotate_letter(letter, rotations, rotated_letter):
     assert rotate_letter(letter, rotations) == rotated_letter

@@ -10,7 +10,13 @@ def parse_room(room):
 
 
 def rotate_letter(letter, times):
-    return 'b'
+    letter_as_number = ord(letter)
+    rotated_letter = letter_as_number + times
+
+    if rotated_letter > ord('z'):
+        rotated_letter = ord('a') + (rotated_letter - ord('z') - 1)
+
+    return chr(rotated_letter)
 
 
 def decrypt_room_name(room, sector_id):
