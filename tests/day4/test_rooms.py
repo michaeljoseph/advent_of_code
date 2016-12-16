@@ -42,6 +42,9 @@ def test_sector_sum():
     ('b', 2, 'd'),
     ('z', 1, 'a'),
     ('z', 0, 'z'),
+    ('a', 26, 'a'),
+    ('a', 27, 'b'),
+    ('q', 343, 'v'),
 ])
 def test_rotate_letter(letter, rotations, rotated_letter):
     assert rotate_letter(letter, rotations) == rotated_letter

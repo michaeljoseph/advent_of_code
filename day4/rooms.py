@@ -11,7 +11,7 @@ def parse_room(room):
 
 def rotate_letter(letter, times):
     letter_as_number = ord(letter)
-    rotated_letter = letter_as_number + times
+    rotated_letter = letter_as_number + (times % 26)
 
     if rotated_letter > ord('z'):
         rotated_letter = ord('a') + (rotated_letter - ord('z') - 1)
