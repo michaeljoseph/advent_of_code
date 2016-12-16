@@ -4,13 +4,17 @@ from collections import defaultdict, Counter
 
 def parse_room(room):
     room_parts = room.split('-')
-    encrypted_name = ''.join(room_parts[:-1])
+    encrypted_name = '-'.join(room_parts[:-1])
     sector_id, checksum = re.match(r'(\d*)\[(.*)\].*', room_parts[-1:][0]).groups()
-    return encrypted_name, sector_id, checksum
+    return encrypted_name, int(sector_id), checksum
+
+
+def decrypt_room_name(room, sector_id):
+    return 'very encrypted name'
 
 
 def calculate_checksum(encrypted_name):
-    c = Counter(encrypted_name)
+    c = Counter(encrypted_name.replace('-', ''))
     occurrence_map = defaultdict(lambda: [])
 
     for value, occurrences in c.most_common():
@@ -29,7 +33,7 @@ def valid_rooms_sector_sum(rooms):
     for room in rooms:
         encrypted_name, sector_id, checksum = parse_room(room)
         if checksum == calculate_checksum(encrypted_name):
-            sector_id_total += int(sector_id)
+            sector_id_total += sector_id
 
     return sector_id_total
 
