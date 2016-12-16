@@ -9,6 +9,10 @@ def parse_room(room):
     return encrypted_name, int(sector_id), checksum
 
 
+def rotate_letter(letter, times):
+    return 'b'
+
+
 def decrypt_room_name(room, sector_id):
     return 'very encrypted name'
 

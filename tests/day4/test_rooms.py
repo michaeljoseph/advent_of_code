@@ -1,5 +1,5 @@
 import pytest
-from day4.rooms import parse_room, calculate_checksum, valid_rooms_sector_sum, decrypt_room_name
+from day4.rooms import *
 
 
 def test_parse_room():
@@ -35,6 +35,13 @@ def test_sector_sum():
         'totally-real-room-200[decoy]',
     ]
     assert 1514 == valid_rooms_sector_sum(rooms)
+
+
+@pytest.mark.parametrize('letter, rotations, rotated_letter', [
+    ('a', 1, 'b'),
+])
+def test_rotate_letter(letter, rotations, rotated_letter):
+    assert rotate_letter(letter, rotations) == rotated_letter
 
 
 def test_decrypt_room_name():
