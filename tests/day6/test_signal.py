@@ -36,15 +36,22 @@ def test_transpose_data():
     )
 
 
-def test_error_correct_character():
+def test_error_correct_most_common_character():
     assert(
-        error_correct_character('ederatsrnnstvvde') ==
+        error_correct_most_common_character('ederatsrnnstvvde') ==
         'e'
+    )
+
+
+def test_error_correct_least_common_character():
+    assert(
+        error_correct_least_common_character('ederatsrnnstvvde') ==
+        'a'
     )
 
 
 def test_error_correct_data():
     assert(
         error_correct_data(example_input) ==
-        'easter'
+        'advent'
     )

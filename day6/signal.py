@@ -1,3 +1,5 @@
+from collections import Counter
+
 
 def extract_column(data, column_number):
     return ''.join([
@@ -13,16 +15,23 @@ def transpose_data(data):
     return transposed
 
 
-def error_correct_character(column_data):
-    from collections import Counter
+def error_correct_most_common_character(column_data):
     c = Counter(column_data)
     return c.most_common(1)[0][0]
+
+
+def error_correct_least_common_character(column_data):
+    c = Counter(column_data)
+    counts = c.most_common()
+    return counts[-1:][0][0]
 
 
 def error_correct_data(data):
     corrected_code = []
     for character_col in transpose_data(data):
-        corrected_code.append(error_correct_character(character_col))
+        corrected_code.append(
+            error_correct_least_common_character(character_col)
+        )
 
     return ''.join(corrected_code)
 
