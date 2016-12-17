@@ -21,3 +21,15 @@ def is_abba(sequence):
     second_half = sequence[2:]
 
     return different_chars and first_half == second_half[::-1]
+
+
+def contains_abba(sequence):
+    x = 0
+
+    while (x+4) <= len(sequence):
+        candidate = sequence[x:x+4]
+        if is_abba(candidate):
+            return True
+        x += 1
+
+    return False
