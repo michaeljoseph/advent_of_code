@@ -1,3 +1,5 @@
+import pytest
+
 from day7.ipv7 import *
 
 
@@ -21,3 +23,13 @@ def test_contains_abba():
 ])
 def test_parse_address(ip_address, address_parts):
     assert parse_address(ip_address) == address_parts
+
+
+@pytest.mark.parametrize('ip_address, tls', [
+    ['abba[mnop]qrst', True],
+    ['ioxxoj[asdfgh]zxcvbn', True],
+    ['abcd[bddb]xyyx', False],
+    ['aaaa[qwer]tyui', False],
+])
+def test_supports_tls(ip_address, tls):
+    assert supports_tls(ip_address) == tls
