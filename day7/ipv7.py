@@ -10,6 +10,7 @@ However, the IP also must
 not have an ABBA within any hypernet sequences,
 which are contained by square brackets.
 """
+import re
 
 
 def is_abba(sequence):
@@ -33,3 +34,12 @@ def contains_abba(sequence):
         x += 1
 
     return False
+
+
+def parse_address(address):
+    matches = re.match(r'(.*)\[(.*)\](.*)', address).groups()
+
+    return [
+        [matches[0], matches[2]],
+        matches[1],
+    ]
