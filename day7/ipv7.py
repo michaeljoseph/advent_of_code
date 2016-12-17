@@ -39,10 +39,20 @@ def contains_abba(sequence):
 def parse_address(address):
     matches = re.match(r'(.*)\[(.*)\](.*)', address).groups()
 
-    return [
-        [matches[0], matches[2]],
-        matches[1],
-    ]
+    addresses = [matches[2]]
+    hypertext = [matches[1]]
+
+    address = matches[0]
+    while '[' in address:
+        matches = re.match(r'(.*)\[(.*)\](.*)', address).groups()
+        address = matches[0]
+
+        addresses.append(matches[2])
+        hypertext.append(matches[1])
+
+    addresses.append(address)
+
+    return [addresses[::-1], hypertext[::-1]]
 
 
 def supports_tls(address):
