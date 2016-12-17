@@ -57,3 +57,16 @@ def supports_tls(address):
             return True
 
     return False
+
+
+def count_supported_tls_addresses(addresses):
+    return sum([supports_tls(address) for address in addresses])
+
+
+if __name__ == '__main__':
+    import sys, io
+
+    input_file = sys.argv[1]
+    addresses = [x.strip() for x in io.open(input_file).readlines()]
+
+    print(count_supported_tls_addresses(addresses))
