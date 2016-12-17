@@ -56,9 +56,13 @@ def parse_address(address):
 
 
 def supports_tls(address):
-    address_parts, hypertext = parse_address(address)
+    address_parts, hypertexts = parse_address(address)
 
-    hypertext_contains_abba = contains_abba(hypertext)
+    hypertext_contains_abba = any(
+        contains_abba(hypertext)
+        for hypertext in hypertexts
+    )
+    
     if hypertext_contains_abba:
         return False
 
