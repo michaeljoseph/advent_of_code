@@ -42,3 +42,13 @@ def test_parse_address_multiple_hypertext():
 ])
 def test_supports_tls(ip_address, tls):
     assert supports_tls(ip_address) == tls
+
+
+def test_count_supported_tls_addresses():
+    addresses = [
+        'abba[mnop]qrst',
+        'ioxxoj[asdfgh]zxcvbn',
+        'abcd[bddb]xyyx',
+        'aaaa[qwer]tyui',
+    ]
+    assert count_supported_tls_addresses(addresses) == 2
