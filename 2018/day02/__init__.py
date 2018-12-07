@@ -13,6 +13,15 @@ def any_repeats(box_id: str, how_many: int):
     return any(repeats)
 
 
+def difference(first, second):
+    assert len(first) == len(second)
+    return sum(
+        1
+        for i in range(len(first))
+        if first[i] != second[i]
+    )
+
+
 def checksum(list_of_box_ids):
     return ( 
         sum([
@@ -27,14 +36,13 @@ def checksum(list_of_box_ids):
     )
 
 
-def difference(first, second):
-    assert len(first) == len(second)
-    return sum(
-        1
-        for i in range(len(first))
-        if first[i] != second[i]
-    )
-    
+def find_box_ids_with_difference(list_of_box_ids, distance):
+    for first, second in permutations(list_of_box_ids, 2):
+        if difference(first, second) == distance:
+            return first, second
+
+    return None, None
+
 
 def letters_in_common(first, second):
     assert len(first) == len(second)
@@ -43,11 +51,3 @@ def letters_in_common(first, second):
         for idx in range(len(first))
         if first[idx] == second[idx]
     ])
-
-
-def find_box_ids_with_difference(list_of_box_ids, distance):
-    for first, second in permutations(list_of_box_ids, 2):
-        if difference(first, second) == distance:
-            return first, second
-
-    return None, None
