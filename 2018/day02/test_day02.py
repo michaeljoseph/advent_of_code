@@ -15,7 +15,7 @@ Of these box IDs,
         4 * 3 = 12.
 """
 
-from . import any_repeats, checksum
+from . import any_repeats, checksum, difference, letters_in_common, find_box_ids_with_difference
 import pytest
 
 
@@ -41,7 +41,7 @@ import pytest
 def test_repeats(box_id, repeated, expected):
     assert any_repeats(box_id, repeated) == expected
 
-BOX_IDS = [
+checksum_box_ids = [
     'abcdef',
     'bababc',
     'abbcde',
@@ -53,12 +53,58 @@ BOX_IDS = [
 def test_repeat_count():
     assert sum([
         any_repeats(box_id, 2)
-        for box_id in BOX_IDS
+        for box_id in checksum_box_ids
     ]) == 4
     assert sum([
         any_repeats(box_id, 3)
-        for box_id in BOX_IDS
+        for box_id in checksum_box_ids
     ]) == 3
 
 def test_checksum():
-    assert checksum(BOX_IDS) == 12
+    assert checksum(checksum_box_ids) == 12
+
+similar_box_ids = [
+    'abcde',
+    'fghij',
+    'klmno',
+    'pqrst',
+    'fguij',
+    'axcye',
+    'wvxyz',
+]
+def test_something():
+    """
+    Confident that your list of box IDs is complete,
+    you're ready to find the boxes full of prototype fabric.
+
+    The boxes will have IDs which 
+    [differ by exactly one character at the same position in both strings]
+
+    The IDs abcde and axcye are close,
+    but they differ by two characters (the second and fourth).
+    
+    However, the IDs fghij and fguij differ by exactly one character,
+    the third (h and u). Those must be the correct boxes.
+
+    What letters are common between the two correct box IDs?
+    (In the example above, this is found by removing the differing character
+    from either ID, producing fgij.)
+    """
+    assert difference('abcde', 'axcye') == 2
+    assert difference('fghij', 'fguij') == 1
+    assert letters_in_common('fghij', 'fguij') == 'fgij'
+
+    assert (
+        find_box_ids_with_difference(
+            similar_box_ids, 1
+        ) 
+        == 
+        ('fghij', 'fguij')
+    )
+    assert (
+        letters_in_common(
+            *find_box_ids_with_difference(similar_box_ids, 1)
+        )
+        ==
+        'fgij'
+    )
