@@ -1,2 +1,2 @@
 day=${1}
-mkdir ${day}; touch ${day}/{__init__,__main__.py,test_${day}}.py
+mkdir ${day}; touch ${day}/{__init__,__main__,test_${day}}.py
