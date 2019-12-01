@@ -26,6 +26,7 @@ def parse_claims(list_of_claims):
 
 
 def total_overlaps(list_of_claims):
+    # FIXME: running count of overlaps?
     combos = set(list(permutations(parse_claims(list_of_claims), 2)))
     return sum(set([
         overlaps(claim_a, claim_b)

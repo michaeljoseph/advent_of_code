@@ -1,2 +1,6 @@
 day=${1}
 mkdir ${day}; touch ${day}/{__init__,__main__,test_${day}}.py
+
+# todo: mould day02 day_template
+# todo: cookiecutter day_template
+# curl https://adventofcode.com/2018/day/3/input > ${day}/input.txt
