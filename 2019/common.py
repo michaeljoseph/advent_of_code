@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 import requests
@@ -20,3 +21,10 @@ def get_puzzle(day):
             puzzle_input.write_text(session.get(f'{AOC}/2019/day/{day}/input').text)
 
     return puzzle_input.read_text()
+
+
+def configure_logging(debug=False):
+    logging.basicConfig(
+        level=logging.DEBUG if debug else logging.INFO,
+        format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s'
+    )
