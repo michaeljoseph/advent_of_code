@@ -23,8 +23,9 @@ def get_puzzle(day):
     return puzzle_input.read_text()
 
 
-def configure_logging(debug=False):
+def configure_logging(name=None, debug=False):
     logging.basicConfig(
         level=logging.DEBUG if debug else logging.INFO,
         format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s'
     )
+    return logging.getLogger(name) if name else None
