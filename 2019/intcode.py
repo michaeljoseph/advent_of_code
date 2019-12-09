@@ -54,7 +54,7 @@ IMMEDIATE = '1'
 d = dict(zip(OPERATIONS, ['add', 'multiply', 'input', 'output', 'jump-true', 'jump-false', 'less-than', 'equals']))
 
 
-def read_arguments(memory, instruction_pointer, modes, num_params):
+def read_arguments(memory, instruction_pointer, modes, num_params, relative_base):
     start = instruction_pointer + 1
     end = start + num_params
 
@@ -82,7 +82,7 @@ def read_arguments(memory, instruction_pointer, modes, num_params):
     return end, arguments, output
 
 
-def read_next_operation(memory, instruction_pointer):
+def read_next_operation(memory, instruction_pointer, relative_base):
     current_instruction = memory[instruction_pointer]
     oc = str(current_instruction)
     oc = oc.zfill(5)
@@ -103,9 +103,9 @@ def read_next_operation(memory, instruction_pointer):
     elif op_code == EXIT:
         return None, None, None, None
 
-    end, args, output = read_arguments(memory, instruction_pointer, modes, num_params)
     # print(memory[instruction_pointer:end])
     # print(d[op_code], args)
+    end, args, output = read_arguments(memory, instruction_pointer, modes, num_params, relative_base)
     return op_code, end, args, output
 
 
@@ -114,10 +114,11 @@ def int_code_v5(memory, inputs=None):
     input_ptr = 0
     outputs = []
     instruction_pointer = 0
+    relative_base = 0
     done = False
 
     while not done:
-        op_code, end, args, output = read_next_operation(memory, instruction_pointer)
+        op_code, end, args, output = read_next_operation(memory, instruction_pointer, relative_base)
 
         if not op_code:
             done = True
